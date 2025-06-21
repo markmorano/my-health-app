@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutrition + AI Layout</title>
+  <style>
+    :root {
+      --main-bg: #0B0F14;
+      --card-bg: #121820;
+      --highlight-bg: #162029;
+      --primary: #00CFFF;
+      --secondary: #FF4F5E;
+      --text-color: #B0C7D1;
+      --text-muted: #7A8C98;
+      --card-border: #1A2B3A;
+      --card-shadow: 0 4px 20px rgba(0, 207, 255, 0.2);
+      --input-bg: #1A1F25;
+      --input-border: #2B3A45;
+      --hover-glow: 0 0 12px rgba(0, 207, 255, 0.4);
+      --focus-ring: 0 0 0 3px rgba(0, 207, 255, 0.5);
+      --disabled-opacity: 0.4;
+      --transition-fast: 0.25s ease;
+      --radius-lg: 16px;
+      --radius-sm: 8px;
+      --scrollbar-thumb: rgba(0, 207, 255, 0.4);
+      --scrollbar-track: rgba(255, 255, 255, 0.05);
+    }
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: Arial, sans-serif;
+      background-color: #0f172a;
+      color: #ffffff;
+    }
+
+    #nutrition-plans-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 0 0 1.6rem;
+      justify-content: center;
+      font-family: 'Segoe UI', 'Tahoma';
+    }
+
+    .nutrition-layout,
+    .meal-plan-output {
+      background: #1e293b;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      flex: 1 1 500px;
+      max-width: 1000px;
+      transition: transform 0.3s ease;
+    }
+
+    .nutrition-layout:hover,
+    .meal-plan-output:hover {
+      transform: scale(1.02);
+    }
+
+    .nutrition-layout {
+      height: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #nutrition-plans-section h2 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+      font-size: 1.75rem;
+    }
+
+    .nutrition-layout .nutrition-container {
+      display: flex;
+      gap: 2rem;
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    .nutrition-result {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-height: 70%;
+      background: #334155;
+      padding: 1rem;
+      margin-top: 2rem;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      overflow: auto;
+    }
+
+    label {
+      color: #cbd5e1;
+      margin-top: 0.5rem;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    input,
+    select {
+      width: 100%;
+      margin-top: 0.1rem;
+      margin-bottom: 0.5rem;
+      padding: 0.3rem 0.7rem;
+      background: #334155;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1 1 30%;
+      background-color: #38bdf8;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      color: #000;
+      padding: 0.4rem 0.6rem;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #0ea5e9;
+      cursor: pointer;
+      transform: scale(1.03);
+    }
+
+        /* Step 1: Set a fixed width for the form */
+    .nutrition-form {
+      width: 300px; /* adjust as needed */
+    }
+
+    /* Step 2: Offset the generate button wrapper.
+      (Assume your gap is 2rem as in your .nutrition-container) */
+    .generate-button-wrapper {
+      margin-top: -2rem;
+      padding: 2px 2px 20px;
+      margin-left: calc(300px + 2rem); /* form width plus gap */
+      
+    }
+
+    /* Step 3: Force the button to match the size of those in .button-container */
+    .generate-button-wrapper .btn {
+      width: calc(100% / 3); /* or a fixed width that matches your other buttons */
+      
+    }
+
+
+    .meal-plan-output .response-box {
+      border: 2px dashed #38bdf8;
+      padding: 1rem;
+      border-radius: 8px;
+      background-color: #1e293b;
+      color: #ffffff;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section id="nutrition-plans-section" class="tool-card">
+    <div class="nutrition-layout">
+      <h2>Nutrition Plan</h2>
+      <div class="nutrition-container">
+        <!-- Form Groups -->
+        <form id="nutrition-form" class="nutrition-form">
+          <div class="form-group">
+            <div class="form-row">
+              <label for="age">Age:</label>
+              <input type="number" id="age" placeholder="e.g. 30" required>
+            </div>
+
+            <div class="form-row">
+              <label for="height-nutrition">Height (cm):</label>
+              <input type="number" id="height-nutrition" placeholder="e.g 170">
+            </div>
+
+            <div class="form-row">
+              <label for="weight-nutrition">Current Weight (kg)</label>
+              <input type="number" id="weight-nutrition" placeholder="e.g 65" required>
+            </div>
+
+            <div class="form-row">
+              <label for="ideal-weight">Ideal Weight Goal(kg)</label>
+              <input type="number" id="ideal-weight" placeholder="e.g 65" required>
+            </div>
+
+            <div class="form-row">
+              <label for="diet">Diet:</label>
+              <select id="diet" required>
+                <option value="keto">Keto</option>
+                <option value="vegan">Vegan</option>
+                <option value="glutenfree">Gluten Free</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="meals-per-day">Number of Meals Per Day:</label>
+              <input type="number" id="meals-per-day" placeholder="e.g 3">
+            </div>
+
+            <div class="button-container">
+              <button class="btn" type="submit">Submit Plan</button>
+              <button class="btn" id="clear-nutrition" type="button">Remove Plan</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="nutrition-result" id="nutrition-result">
+          <h3>🍞Nutrition Result</h3>
+          <!-- Results appear here -->
+        </div>
+      </div>
+
+      <div class="generate-button-wrapper">
+        <button class="btn" id="generate-meal" type="button">Generate Plan</button>
+      </div>
+    </div>
+
+    <!-- AI Response-->
+    <div id="meal-plan-response" class="meal-plan-output">
+      <h2>AI Response</h2>
+      <div class="response-box">
+        <p>Generated response here</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

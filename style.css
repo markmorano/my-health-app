@@ -1,0 +1,1191 @@
+:root {
+    --main-bg: #0B0F14;
+    --card-bg: #121820;
+    --highlight-bg: #162029;
+    --primary: #00CFFF;
+    --secondary: #FF4F5E;
+    --text-color: #B0C7D1;
+    --text-muted: #7A8C98;
+    --card-border: #1A2B3A;
+    --card-shadow: 0 4px 20px rgba(0, 207, 255, 0.2);
+    --input-bg: #1A1F25;
+    --input-border: #2B3A45;
+    --hover-glow: 0 0 12px rgba(0, 207, 255, 0.4);
+    --focus-ring: 0 0 0 3px rgba(0, 207, 255, 0.5);
+    --disabled-opacity: 0.4;
+    --transition-fast: 0.25s ease;
+    --radius-lg: 16px;
+    --radius-sm: 8px;
+    --scrollbar-thumb: rgba(0, 207, 255, 0.4);
+    --scrollbar-track: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--main-bg);
+    color: var(--text-color);
+    background-image: url(background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+/* Header Start */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem 0;
+    color: var(--primary);
+    box-shadow: 0 5px 20px rgb(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 0 solid var(--secondary);
+    z-index: 1000;
+}
+
+.header-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    font-family: 'Segoe UI', 'Roboto';
+}
+
+.logo {
+    flex: 1 1 auto;
+    text-align: left;
+    font-size: px;
+    font-weight: 700;
+}
+
+nav {
+   flex: 2 1 100%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: color 0.3s, text-shadow 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--primary);
+    text-shadow: 0 0 6px rgba(0, 207, 255, 0.4);
+}
+
+nav ul li a.active {
+    color: var(--primary);
+    text-shadow: 0 0 6px rgba(0, 207, 255, 0.6);
+    font-weight: 600;
+}
+
+/* Header END */
+
+main {
+    margin: 0 auto;
+}
+
+/* First Section Title */
+.hero {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7rem 2rem 2rem;
+    background: rgba(11, 15, 20, 0.4);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(12px);
+    box-sizing: border-box;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    color: var(--text-color);
+    gap: 2rem;
+}
+
+.hero-left,
+.hero-text {
+    flex: 1 1 300px;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.hero-left {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-left h1 {
+    font-size: 4rem;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.flicker-text {
+    color: var(--primary);
+    text-shadow: 
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px rgba(0, 207, 255, 0.6);
+    animation: flicker 3.5s infinite;
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 80%, 100% {
+        opacity: 1;
+        text-shadow:
+            0 0 5px var(--primary),
+            0 0 10px var(--primary),
+            0 0 20px var(--primary),
+            0 0 40px rgba(0, 207, 255, 0.6);
+    }
+
+    20%, 22%, 24%, 70% {
+        opacity: 0.6;
+        text-shadow: none;
+    }
+
+    25%, 71%, 73% {
+        opacity: 0.3;
+        text-shadow:
+            0 0 2px var(--primary),
+            0 0 5px rgba(0, 207, 255, 0.2);
+    }
+}
+
+.plus-sign {
+    color: var(--secondary);
+    margin-left: 0.2rem;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.hero-left p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    
+}
+
+.hero-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-text p {
+    font-weight: 900;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 6rem 1rem 2rem;
+        text-align: center;
+    }
+
+    .hero-left,
+    .hero-text {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .hero-text p {
+        text-align: center;
+    }
+
+    .hero-left h1 {
+        font-size: 3rem;
+    }
+
+    .hero-left p {
+        font-size: 1rem;
+    }
+}
+
+/* First Section Title End */
+
+/* Features Container */
+
+.features-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.feature-card {
+    background-color: rgba(18, 24, 32, 0.4);
+    border: 1.5px solid var(--card-bg, #444);
+    border-radius: var(--radius-lg, 12px);
+    padding: 20px;
+    color: var(--primary, #fff);
+    box-shadow: var(--card-shadow, 0 0 10px rgba(0, 0, 0, 0.2));
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 220px; /* Fixed height */
+    text-align: center;
+    position: relative;
+
+}
+
+.feature-card:hover {
+    background-color: var(--highlight-bg);
+    border-color: var(--primary);
+    box-shadow: var(--hover-glow);
+}
+
+.feature-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(0, 207, 255, 0.05);
+}
+
+.feature-card[data-feature] h3 {
+    color: #00bfff;
+    text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+.feature-card[data-feature]:hover .feature-icon-glow {
+    transform: scale(1.05);
+}
+
+.feature-card h3 {
+    font-size: 1.7rem;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 8px 0 0;
+    line-height: 1.3;
+    flex-grow: 0;
+}
+
+.feature-icon-glow {
+    width: 90px;
+    max-width: 90px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.8));
+    transition: transform 0.3s ease;
+}
+
+@media (max-width:600px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 16px;
+        min-height: 120px;
+    }
+
+    .feature-icon,
+    .feature-icon-glow {
+        width: 70px;
+        margin-bottom: 8px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.3rem;
+    }
+}
+
+/* ONLY FOR AI BUTTON */
+.ask-ai-card {
+  display: flex;
+  grid-column: 1 / -1; /* Span full width first */
+  justify-self: center;
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  color: #fff;
+  height: 120px;
+  width: 65%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-radius: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ask-ai-card:hover {
+  background: linear-gradient(135deg, #00cfff, #005577);
+  box-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
+}
+
+.feature-card.ask-ai-card h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.ask-ai-card p {
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.9;
+}
+
+@media (max-width:700px) {
+  .ask-ai-card {
+      grid-column: span 1;
+      flex-direction: column;
+      text-align: center;
+      height: auto;
+  }
+
+  .ask-ai-card h3 {
+      font-size: 1.4rem;
+  }
+
+  .ask-ai-card p {
+      font-size: 0.9rem;
+  }
+}
+/* Key Features Tool Cards */
+
+/* Feature Interface */
+
+#feature-interface {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 6.5rem 1.5rem 0;
+  box-sizing: border-box;
+}
+
+.tool-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #00CFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+#feature-interface.hidden {
+  display: none;
+  padding: 0;
+  margin: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== BMI Calculator ====== */
+
+#bmi-calculator {
+  background-color: var(--card-border);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 1100px;
+  margin: 3rem auto;
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#bmi-calculator h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+#bmi-calculator p {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Flex wrapper for form and AI output */
+.bmi-flex-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Left side: form */
+.bmi-form-wrapper {
+  flex: 1 1 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bmi-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border: 1px solid #334155;
+}
+
+.bmi-form-wrapper input,
+.bmi-form-wrapper button[type="submit"],
+.ai-button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.bmi-form-wrapper input {
+  border: 1px solid #444c63;
+  background-color: var(--highlight-bg);
+  color: var(--text-color);
+}
+
+.bmi-form-wrapper input::placeholder {
+  color: #a1a8c7;
+}
+
+.bmi-form-wrapper button[type="submit"],
+.ai-button {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.bmi-form-wrapper button[type="submit"]:hover,
+.ai-button:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.4);
+}
+
+.bmi-form-wrapper label {
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+/* BMI Result */
+#bmi-result {
+  margin-top: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--highlight);
+}
+
+/* Right side: AI response box */
+.bmi-ai-response {
+    display: block;
+    flex: 1 1 48%;
+    max-height: 460px;
+    overflow-y: auto;
+    background-color: var(--highlight-bg);
+    padding: 1.25rem;
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+    color: var(--text-color);
+}
+
+.bmi-ai-response::-webkit-scrollbar {
+    width: 8px;
+}
+
+.bmi-ai-response::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 8px;
+}
+
+/* AI Intro */
+.ai-intro {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.ai-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ai-section {
+  background: var(--card-bg);
+  border-left: 4px solid var(--primary);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  color: var(--text-color);
+}
+
+.section-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.ai-section p {
+  margin: 0.4rem 0;
+  line-height: 1;
+  color: var(--text-color);
+}
+
+.ai-section ul {
+  margin: 0.4rem 0;
+  padding-left: 1.2rem;
+  list-style-type: disc;
+  color: var(--text-color);
+}
+
+.ai-section li {
+  margin: 0.3rem 0;
+}
+
+.highlight {
+  font-weight: 600;
+  color: var(--secondary);
+  background: var(--highlight-bg);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+}
+/* ===== BMI Calculator END ====== */
+
+/* ===== Medication Reminder ====== */
+#medication-calendar-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0 0 1.6rem ;
+    justify-content: center;
+    background: none;
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma;
+}
+
+.medication-section,
+.calendar-wrapper {
+    background: var(--card-bg);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    flex: 1 1 500px;
+    max-width: 1000px;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.medication-section {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.medication-section:hover,
+.calendar-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0, 207, 255, 0.25);
+}
+
+#medication-calendar-section h2 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.medication-section .medication-content {
+    display: flex;
+    gap: 2rem;
+    flex-grow: 1;
+    height: 100%;
+}
+
+#medicationForm,
+#reminderDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+#reminderDetails { overflow-y: auto;}
+
+#medication-calendar-section label {
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 0.95rem;
+}
+
+#medication-calendar-section input,
+#medication-calendar-section textarea,
+#medication-calendar-section button,
+#medication-calendar-section select {
+    width: 100%;
+    margin-top: 0.1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+    box-sizing: border-box;
+}
+
+#medication-calendar-section input:focus,
+#medication-calendar-section textarea:focus,
+#medication-calendar-section select:focus {
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
+
+#medication-calendar-section button {
+    background-color: var(--primary);
+    color: #000;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+#medication-calendar-section button:hover {
+    box-shadow: var(--hover-glow);
+}
+
+        /* Reminder Lists */
+
+#medication-calendar-section .reminderDetails {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--highlight-bg);
+    scrollbar-color: var(--scrollbar-thumb);
+}
+
+#medication-calendar-section .reminderDetails::-webkit-scrollbar {
+      width: 8px;
+}
+
+#medication-calendar-section .reminderDetails::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: var(--radius-sm);
+}
+
+#medication-calendar-section .reminderDetails::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track);
+}
+
+        /* Reminder Entries */
+#medication-calendar-section .reminder-entry {
+    background: linear-gradient(135deg, #1e2a36 0%, #202e3c 100%);
+    padding: 0.6rem;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--primary);
+    display: flex;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    font-size: 0.85rem;
+    min-height: 80px;
+    transition: background 0.3s;
+}
+
+#medication-calendar-section .reminder-entry:hover {
+    background: var(--highlight-bg);
+}
+
+#medication-calendar-section .reminder-entry .note {
+    color: var(--text-color);
+    word-break: break-word;
+    font-weight: 500;
+}
+
+#medication-calendar-section .reminder-entry .time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+}
+
+#medication-calendar-section .reminder-entry .delete-btn {
+    display: inline-block;
+    background: var(--secondary);
+    border: none;
+    width: auto;
+    padding: 3px 9px;
+    margin-left: auto;
+    font-size: 0.75rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#medication-calendar-section .reminder-entry .delete-btn:hover {
+      transform: scale(1.05);
+    }
+
+        /* Calendar Days */
+#medication-calendar-section .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+#medication-calendar-section .calendar-day {
+    height: 65px;
+    background: var(--input-border);
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: var(--transition-fast);
+    border: 1px solid transparent;
+}
+
+#medication-calendar-section .calendar-day:hover {
+    background: var(--highlight-bg);
+    border-color: var(--primary);
+    transform: scale(1.03);
+}
+
+#medication-calendar-section .calendar-day.has-reminder::after {
+    content: "\1F48A";
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    font-size: 1rem;
+    color: var(--secondary);
+}
+
+#medication-calendar-section #clearReminder {
+    display: none;
+    background: var(--secondary);
+    color: whitesmoke;
+    margin-top: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    #medication-calendar-section {
+    flex-direction: column;
+    padding: 1rem;
+    }
+
+    #medication-calendar-section > #medication-section,
+    #medication-calendar-section .calendar-wrapper {
+    max-width: 100%;
+    padding: 1rem;
+    }
+
+    #medication-calendar-section .reminder-entry {
+    grid-template-columns: 1fr;
+    }
+
+    #medication-calendar-section .reminder-entry .time {
+    flex-direction: column;
+    align-items: flex-start;
+    }
+
+    #medication-calendar-section .calendar {
+    grid-template-columns: repeat(7, minmax(35px, 1fr));
+    }
+
+    #medication-calendar-section .calendar-day {
+    height: 70px;
+    font-size: 0.75rem;
+    }
+}
+
+/* ===== Medication Reminder END ===== */
+
+/* ===== Personalized Nutrition Plans ===== */
+/* Wrapper for nutrition + AI response */
+#nutrition-plans-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 0 0 1.6rem;
+    justify-content: center;
+    background: none;
+    color: var(--text-color);
+    font-family: 'Segoe UI', 'Tahoma';
+}
+
+.nutrition-layout,
+.meal-plan-output {
+    background: var(--card-bg);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--card-shadow);
+    flex: 1 1 500px;
+    max-width: 1000px;
+}
+
+.nutrition-layout {
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#nutrition-plans-section h2 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.75rem;
+}
+
+.nutrition-layout .nutrition-container {
+    display: flex;
+    gap: 2rem;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.form-group,
+.nutrition-result {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+}
+
+#nutrition-plans-section label {
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 0.95rem;
+}
+
+#nutrition-plans-section input,
+#nutrition-plans-section select {
+    width: 100%;
+    margin-top: 0.1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-color);
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.button-container {
+    display: flex;
+    font-weight: bold;
+    font-size: 1.3rem;  
+}
+
+.button-container .btn {
+    background-color: var(--primary);
+    flex: 1;
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    color: #000;
+}
+
+/* ===== Personalized Nutrition Plans END ===== */
+
+
+
+/* KEY FEATURES END */
+.tool-card {
+    background: #ffffff;
+    max-width: 100%;
+}
+
+.ask-ai {
+    background: var(--card-bg);
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.ask-ai h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 32px;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.ask-ai legend {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--secondary);
+    padding: 0 0.5rem;
+    line-height: 1.2;
+}
+
+legend {
+    font-size: inherit !important;
+}
+
+.needs-fieldset {
+    border: none;
+}
+
+.needs-fieldset,
+.question-box {
+    flex: 1;
+    min-width: 300px;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    min-width: 200px;
+    flex-wrap: wrap;
+}
+
+.country-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 100%;
+    flex-shrink: 0;
+}
+
+#country-select {
+    padding: 2px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid var(--secondary);
+}
+
+/* Flag CSS */
+.img-flag {
+    width: 20px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.ask-ai input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: var(--primary);
+}
+
+.ask-ai p {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.question-box {
+    flex: 1;
+    min-width: 300px;
+}
+
+.ask-ai form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.question-fieldset {
+    padding: 0.7rem 1rem 1rem 1rem;
+    position: relative;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    width: 100%;
+    margin-top:9px;
+    box-sizing: border-box;
+}
+
+.floating-label {
+    position: absolute;
+    top: -0.8rem;
+    left: 1rem;
+    background: var(--card-bg);
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    color: var(--secondary);
+    font-weight: bold;
+    line-height: 1.2;
+    pointer-events: none;
+    max-width: calc(100% - 2rem);
+    white-space: nowrap;
+}
+
+#user-question {
+    width: 100%;
+    resize: vertical;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    box-sizing: border-box;
+
+}
+
+.ask-ai-form button {
+    align-self: flex-start;
+    padding: 0.6rem 1.2rem;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.ask-ai-form button:hover {
+    background-color: var(--secondary);
+}
+
+.ai-response {
+    width: 100%;
+    margin-top: 1rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--secondary);
+    padding: 1rem;
+    min-height: 150px;
+    overflow: auto;
+    display: none; /* Take note for Java Script */
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+}
+
+.loading-spinner {
+    border: 6px;
+    border-top: 6px solid var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 1rem auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
