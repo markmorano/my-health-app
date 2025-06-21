@@ -243,11 +243,16 @@ featureCards.forEach(card => {
                         templateSelection: formatCountry,
                         minimumResultsForSearch: Infinity
                     });
+                    const form = document.querySelector(".ask-ai-form");
+                    if (form) {
+                        form.addEventListener("submit", AskAI);
+                    } else {
+                        console.error("Ask AI section not found.");
+                    }
+
                     const askAiSection = document.getElementById('ask-ai-section');
                     if (askAiSection) {
                         askAiSection.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                        console.error("Ask AI section not found.");
                     }
                 }, 0);
                 break;
@@ -373,7 +378,7 @@ function attachBMIFormHandler() {
 
         // Example POST request for Python backend API
 
-        fetch('http://127.0.0.1:5000/bmi_ai_suggestion', {
+        fetch('https://my-health-app-backend.onrender.com/bmi_ai_suggestion', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -470,7 +475,7 @@ function attachNutritionFormHandler() {
 
             mealPlanDiv.innerHTML = '<p class="loading-text">Fueling up focus & facts<span class="dots"></span></p>';
 
-            fetch("http://127.0.0.1:5000/generate_meal_plan", {
+            fetch("https://my-health-app-backend.onrender.com/generate_meal_plan", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -546,7 +551,7 @@ function AskAI(event) {
         // Get selected country
     const selectCountry = document.getElementById("country-select").value;
 
-    fetch("http://127.0.0.1:5000/ask_ai", {
+    fetch("https://my-health-app-backend.onrender.com/ask_ai", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
