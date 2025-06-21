@@ -6,64 +6,71 @@ const featureCards = document.querySelectorAll('.feature-card');
 
 
 const askAiHTML = `
-    <section class="ask-ai" id="ask-ai">
-            <button></button>
-            <h2>Ask Health AI</h2>
+    <section id="ask-ai-section" class="tool-card">
+            <!-- Left Side -->
+        <div class="ask-ai-left">
+            <h2>⚕️Ask Health AI</h2>
             <p>Have a question about your health? Our AI assistant is here to help. Just type your concern and get quick, personalized guidance.</p>
 
-            <!-- Flex Container -->
             <div class="input-wrapper">
-                <!-- Left Side -->
                 <fieldset class="needs-fieldset">
                     <legend>Select what you need:</legend>
-
-                        <div class="input-row">
-                            <div class="checkbox-group">
-                                <label><input type="checkbox" name="need" value="provide medicine needs">Medicine</label>
-                                <label><input type="checkbox" name="need" value="first-aid">First Aid</label>
-                                <label><input type="checkbox" name="need" value="food">Food Requirement</label>
-                            </div>
-
-                            <div class="country-group">
-                                <label for="country-select">Select Country:</label>
-                                <select name="country" id="country-select">
-                                    <option value="ph" data-flag="https://flagcdn.com/w40/ph.png">PHI</option>
-                                    <option value="us" data-flag="https://flagcdn.com/w40/us.png">US</option>
-                                    <option value="uk" data-flag="https://flagcdn.com/w40/gb.png">UK</option>
-                                    <option value="ca" data-flag="https://flagcdn.com/w40/ca.png">CAN</option>
-                                    <option value="au" data-flag="https://flagcdn.com/w40/au.png">AUS</option>
-                                </select>
-                            </div>
+                        
+                    <div class="input-row">
+                            <!-- checkboxes -->
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="need" value="suggest medicine">Suggest Medicine</label>
+                            <label><input type="checkbox" name="need" value="suggest first aid">Suggest First-Aid</label>
+                            <label><input type="checkbox" name="need" value="suggest food">Required Foods</label>
                         </div>
-                </fieldset>
 
-            <!-- Right Side -->
+                            <!-- countries -->
+                        <div class="country-group">
+                            <label for="country-select">Select Country:</label>
+                            <select name="country" id="country-select">
+                                <option value="ph" data-flag="https://flagcdn.com/w40/ph.png">PHILIPPINES</option>
+                                <option value="cn" data-flag="https://flagcdn.com/w40/cn.png">CHINA</option>
+                                <option value="us" data-flag="https://flagcdn.com/w40/us.png">UNITED STATES</option>
+                                <option value="uk" data-flag="https://flagcdn.com/w40/gb.png">UNITED KINGDOM</option>
+                                <option value="ca" data-flag="https://flagcdn.com/w40/ca.png">CANADA</option>
+                                <option value="au" data-flag="https://flagcdn.com/w40/au.png">AUSTRALIA</option>
+                            </select>
+                        </div>                                
+                    </div>
+                </fieldset>
+                            <!-- ASk AI -->
                 <div class="question-box">
                     <form class="ask-ai-form" onsubmit="AskAI(event)">
-                    
                         <div class="question-fieldset">
-                            <label for="user-question" class="floating-label">Your Question:</label>
-                
-                            <textarea name="user-question" id="user-question" placeholder="Ask me..."></textarea>
+                            <label for="user-question">Your Question:</label>
+                            <textarea name="user-question" id="user-question" placeholder="e.g I am having a headache..." required></textarea>
+                            <button type="submit">🚀Show Treatment Suggestions</button>
                         </div>
-                        <button type="submit">Ask AI</button>
+                        
                     </form>
+                    
                 </div>
             </div>
+        </div>
 
-            <!--AI Response-->
-            <div class="ai-response" id="ai-response"></div>
-            <div class="loading-spinner" id="loading-spinner" style="display: none;;"></div>
-            
+            <!-- Right Side -->
+        <div class="ask-ai-right">
+            <h2>🤖AI Response</h2>
+
+            <div class="ai-response" id="ai-response">
+                <p>Generated AI response here</p>
+            </div>
+        </div>
     </section>`;
 
 const bmiCalculatorHTML = `
-    <section id="bmi-calculator" class="tool-card">
-        <h2>BMI & Wellness Calculator</h2>
-        <p>Enter your height and weight to calculate your Body Mass Index (BMI)</p>
+    <section id="bmi-calculator-section" class="tool-card">
+                
+        <!-- Left Side Form-->
+        <div class="bmi-calculator-left">
+            <h2>🧮BMI & Wellness Calculator</h2>
+            <p>Enter your height and weight to calculate your Body Mass Index (BMI)</p>
 
-        <div class="bmi-flex-wrapper">
-            <!-- Left Side Form-->
             <div class="bmi-form-wrapper">
                 <form id="bmi-form" class="bmi-form">
                     <div class="form-row">
@@ -75,80 +82,100 @@ const bmiCalculatorHTML = `
                         <label for="weight">Weight (kg):</label>
                         <input type="number" id="weight" placeholder="e.g 65" required>
                     </div>
-
-                    <button type="submit">Calculate BMI</button>
                 </form>
+                <button type="submit">🏋️Calculate BMI</button>
                 <!-- BMI Result -->
-                <div id="bmi-result" class="bmi-result"></div>
+                <div id="bmi-result" class="bmi-result">Body Mass Index (BMI) Results</div>
                 <!-- AI Suggestion button -->
                 <button id="ai-suggestion-btn" class="ai-button hidden">Get AI Suggestion</button>
             </div>
-            
-            <!-- Right Side -->
-            <!-- AI Response -->
+        </div>
+
+        <!-- Right Side -->
+        <div class="bmi-calculator-right">
+            <h2>🏃Do you Like Running?</h2>
+                            <!-- AI Response -->
             <div id="bmi-ai-response" class="bmi-ai-response ">
-                <div class="ai-box-content" id="ai-box-content"></div>
+                <p>Generated AI response here</p>
             </div>
         </div>
+        
     </section>`;
 
-const nutriionPlansHTML = `
-    <section id="nutrition-plans" class="tool-card">
-        <h2>Personalized Nutrition Plans</h2>
-        <p>Get customized meal suggestions based on your profile and goals.</p>
-
+const nutritionPlansHTML = `
+    <section id="nutrition-plans-section" class="tool-card">
+                
         <div class="nutrition-layout">
-            <form id="nutrition-form" class="nutrition-form">
-                <div class="form-grid">
-                    <div class="form-row">
-                        <label for="age">Age:</label>
-                        <input type="number" id="age" placeholder="e.g. 30" required>
+            <h2>📊Nutrition Plan</h2>
+        
+            <div class="nutrition-container">
+
+                <!-- Form Groups -->
+                <form id="nutrition-form" class="nutrition-form">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <label for="age">⏳Age:</label>
+                            <input type="number" id="age" placeholder="e.g. 30" required>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="height-nutrition">📏Height (cm):</label>
+                            <input type="number" id="height-nutrition" placeholder="e.g 170">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="weight-nutrition">⚖️Current Weight (kg)</label>
+                            <input type="number" id="weight-nutrition" placeholder="e.g 65" required>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="ideal-weight">🏋️Ideal Weight Goal(kg)</label>
+                            <input type="number" id="ideal-weight" placeholder="e.g 65" required>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="diet">Diet:</label>
+                            <select id="diet" required>
+                                <option value="keto">🥓Keto</option>
+                                <option value="vegan">🥦Vegan</option>
+                                <option value="glutenfree">🥜Gluten Free</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="meals-per-day">🍽️Number of Meals Per Day:</label>
+                            <input type="number" id="meals-per-day" placeholder="e.g 3">
+                        </div>
+
                     </div>
 
-                    <div class="form-row">
-                        <label for="height-nutrition">Height (cm):</label>
-                        <input type="number" id="height-nutrition" placeholder="e.g 170">
-                    </div>
+                </form>
 
-                    <div class="form-row">
-                        <label for="weight-nutrition">Current Weight (kg)</label>
-                        <input type="number" id="weight-nutrition" placeholder="e.g 65" required>
-                    </div>
-
-                    <div class="form-row">
-                        <label for="ideal-weight">Ideal Weight Goal(kg)</label>
-                        <input type="number" id="ideal-weight" placeholder="e.g 65" required>
-                    </div>
-
-                    <div class="form-row">
-                        <label for="goal">Goal:</label>
-                        <select id="goal" required>
-                            <option value="lose">Weight loss</option>
-                            <option value="maintain">Maintain Weight</option>
-                            <option value="gain">Weight Gain</option>
-                        </select>
-                    </div>
-
-                    <div class="form-row">
-                        <label for="meals-per-day">Number of Meals Per Day:</label>
-                        <input type="number" id="meals-per-day" placeholder="e.g 2000">
-                    </div>
+                <div class="nutrition-result" id="nutrition-result">
+                    <h3>🍞Nutrition Result</h3>
+                            <!-- Generate plan will go here -->
                 </div>
+            </div>  
 
-                <button type="submit">Submit Plan</button>
-                <button type="button" id="clear-nutrition">Remove Plan</button>
-                <button id="generate-meal" type ="button">Generate Meal Plan</button>
-            </form>
-            
-            <div id="meal-plan-response" class="meal-plan-output">
-                <!-- Will Generate meal plan AI -->
+                <!-- Buttons -->
+            <div class="button-container">
+                <button class="btn" id="submit-nutrition" type="submit">✔️Submit</button>
+                <button class="btn" id="generate-meal" type ="button">⚙️Generate Meal</button>
+                <button class="delete-btn" id="clear-nutrition" type="button">🗑️Remove</button>
             </div>
+
         </div>
 
-        <div class="nutrition-result" id="nutrition-result">
-                <!-- Generate plan will go here -->
-        </div>
+        <!-- AI Response-->
+        <div id="meal-plan-response" class="meal-plan-output">
+            <h2>🤖Meal Plan Generated</h2>
 
+                <!-- Will Generate meal plan AI -->
+            <div id="response-box" class="response-box">
+                <p>Generated AI response here</p>
+            </div>
+        </div>  
+                    
     </section>`;
 
 const medicationReminderHTML = `
@@ -211,7 +238,12 @@ featureCards.forEach(card => {
 
                 // Wait for DOM update before trying to scroll
                 setTimeout(() => {
-                    const askAiSection = document.getElementById('ask-ai');
+                    $('#country-select').select2({
+                        templateResult: formatCountry,
+                        templateSelection: formatCountry,
+                        minimumResultsForSearch: Infinity
+                    });
+                    const askAiSection = document.getElementById('ask-ai-section');
                     if (askAiSection) {
                         askAiSection.scrollIntoView({ behavior: 'smooth' });
                     } else {
@@ -225,7 +257,7 @@ featureCards.forEach(card => {
                 attachBMIFormHandler();
                 // Smooth scroll with delay to ensure DOM is rendered
                 setTimeout(() => {
-                    const bmiCalcSection = document.getElementById('bmi-calculator');
+                    const bmiCalcSection = document.getElementById('bmi-calculator-section');
                     if (bmiCalcSection) bmiCalcSection.scrollIntoView({ behavior: 'smooth' });
                 }, 0);
                 break;
@@ -248,7 +280,7 @@ featureCards.forEach(card => {
                 featureInterface.innerHTML = nutritionPlansHTML;
                 attachNutritionFormHandler();
                 // Scroll smoothly to nutrition plans
-                document.getElementById('nutrition-plans').scrollIntoView({ behavior: 'smooth'});
+                document.getElementById('nutrition-plans-section').scrollIntoView({ behavior: 'smooth'});
                 break;
             
             //add more cases
@@ -262,168 +294,8 @@ featureCards.forEach(card => {
     });
 });
 
-// Format Text for clean look
-function formatAIOutput(rawText, options = {}) {
-    const {
-        sectionPattern = /(Month \d:|Important Reminders|Estimated Weight Loss)/gi,
-        sectionLabels = [],
-        useEmojis = false,
-        highlightShortLines = true
-    } = options;
-
-    // Clean and normalize the input text
-    let cleanText = rawText
-        .replace(/---+/g, '')                         // Remove lines of dashes
-        .replace(/#+/g, '')                           // Remove markdown headings (#)
-        .replace(/\*\s/g, '• ')                       // Normalize bullet points
-        .replace(/^\s*Month \d:\s*$/gmi, '')          // Remove standalone "Month X:" lines
-        .replace(/^Month \d:\s*\n(?=Month \d: )/gmi, '') // Remove "Month X:" if followed by same line
-        .replace(/\n{2,}/g, '\n')                     // Collapse multiple blank lines to single
-        .trim();
-
-
-    const sections = cleanText.split(new RegExp(`(?=${sectionPattern.source})`, 'gi'));
-    let intro = sections[0]?.trim() || '';
-
-    // Simplify intro: preserve exact AI start if present, else clean long phrases
-    if (!intro.startsWith("Here's the 3-month plan for healthier living")) {
-        intro = intro
-            .replace(/^(Here is|Welcome to|Your plan is|This is|Let's start with|Based on your results)[^\.]*\.?/i, '')
-            .split(/[\.\n]/)[0]  // keep only first sentence or first line
-            .trim();
-    }
-
-    if (!intro) intro = 'Your personalized plan:';
-
-    const isBullet = line => /^[-•]\s/.test(line);
-
-    const formattedSections = sections.slice(1).map((text, i) => {
-        let lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-        const isWorkoutSection = /workout/i.test(lines[0] || '');
-        let html = [];
-
-        if (sectionLabels[i]) {
-            const labelText = useEmojis ? `${sectionLabels[i]}` : sectionLabels[i].replace(/^[^a-zA-Z0-9]+/, '');
-            html.push(`<h4 class="section-heading">${labelText}</h4>`);
-        }
-
-        let inList = false;
-
-        for (let line of lines) {
-            if (isBullet(line)) {
-                if (isWorkoutSection) {
-                    let workoutName = line.replace(/^[-•]\s*/, '').split(/[,–:-]/)[0].trim();
-                    if (!inList) {
-                        html.push('<ul style="margin:0; padding-left:1.2rem; line-height:1;">');
-                        inList = true;
-                    }
-                    html.push(`<li>${workoutName}</li>`);
-                } else {
-                    if (!inList) {
-                        html.push('<ul style="margin:0; padding-left:1.2rem; line-height:1.1;">');
-                        inList = true;
-                    }
-                    html.push(`<li>${line.replace(/^[-•]\s*/, '')}</li>`);
-                }
-            } else {
-                if (inList) {
-                    html.push('</ul>');
-                    inList = false;
-                }
-                if (highlightShortLines && line.length < 100) {
-                    html.push(`<p class="highlight" style="margin:0.3rem 0; line-height:1.3;">${line}</p>`);
-                } else {
-                    html.push(`<p style="margin:0.4rem 0; line-height:1.4;">${line}</p>`);
-                }
-            }
-        }
-
-        if (inList) html.push('</ul>');
-
-        return html.join('\n');
-    });
-
-    return `
-        <div class="ai-intro" style="font-weight:600; font-size:1rem; margin-bottom:0.7rem; color: var(--text-color); line-height:1.3;">
-            ${intro}
-        </div>
-        <div class="ai-body" style="display:flex; flex-direction:column; gap:0.8rem;">
-            ${formattedSections.join('\n')}
-        </div>
-    `.trim();
-}
-
-// Ask AI
-function AskAI(event) {
-    event.preventDefault();
-
-    const question = document.getElementById("user-question").value;
-    const responsiveDiv = document.getElementById("ai-response");
-    const spinner = document.getElementById("loading-spinner")
-
-    // Spinner
-    if (!responsiveDiv || !spinner) {
-        console.error("Required element not found.");
-        return;
-    } 
-
-    responsiveDiv.style.display = "none"; // Hide Previous response
-    spinner.style.display = "block";
-
-    // Get all selected checkbox values
-
-    const selectedNeeds = Array.from(document.querySelectorAll('input[name="need"]:checked')).map(cb => cb.value);
-
-    if(!responsiveDiv) {
-        console.error("Element with ID 'ai-response' not found. ");
-        return;
-    }
-
-    // Get selected country
-
-    const selectCountry = document.getElementById("country-select").value;
-    
-
-    responsiveDiv.innerText = "Thinking...";
-
-    fetch("http://127.0.0.1:5000/ask_ai", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ 
-            question: question,
-            needs: selectedNeeds,
-            country: selectCountry
-         })
-    })
-    .then(response => {
-        if(!response.ok) {
-            throw new Error("Server error");
-            
-        }
-        return response.json();
-    })
-    .then(data => {
-        spinner.style.display = "none"; // Hide spinner
-        const markdown = data.response || "No answer received.";
-        const htmlResponse = marked.parse(markdown);
-
-        // HTML content
-        responsiveDiv.innerHTML = htmlResponse;
-        responsiveDiv.style.display = "block";
-    })
-    .catch(error => {
-        console.error("Error", error);
-        spinner.style.display = "none";
-        console.error("Error", error);
-        responsiveDiv.innerText = "Failed to contact AI server";
-    });
-};
-
 // Flags
-$(document).ready(function () {
-    function formatCountry(option) {
+function formatCountry(option) {
         if (!option.id) return option.text;
         const flagURL = $(option.element).data('flag');
         if (flagURL) {
@@ -436,24 +308,23 @@ $(document).ready(function () {
         templateResult: formatCountry,
         templateSelection: formatCountry,
         minimumResultsForSearch: Infinity
-    });
 });
-
 
 // BMI Calculator
 function attachBMIFormHandler() {
     const bmiForm = document.getElementById('bmi-form');
     const aiBtn = document.getElementById('ai-suggestion-btn');
-    const aiBox = document.getElementById('ai-box-content');
+    const aiBox = document.getElementById('bmi-ai-response');
     const bmiResult = document.getElementById('bmi-result');
-    //const aiResponseContainer = document.getElementById('bmi-ai-response');  // <-- reference to AI response div
+    const bmiBtn = document.querySelector('button[type="submit"]');
 
     if (!bmiForm) return;
 
     let currentBMI = null;
     let currentStatus = null;
+    
 
-    bmiForm.addEventListener('submit', (e) => {
+    bmiBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
         const heightCm = parseFloat(document.getElementById('height').value);
@@ -465,7 +336,7 @@ function attachBMIFormHandler() {
             //aiResponseContainer.classList.add('hidden');
             return;
         }
-
+    
         const height = heightCm / 100;
         const bmi = (weightKg / (height * height)).toFixed(2);
 
@@ -476,7 +347,7 @@ function attachBMIFormHandler() {
         else if (bmi < 29.9) status = 'Overweight';
         else status = 'Obese';
 
-        bmiResult.textContent = `Your BMI is ${bmi} (${status})`;
+        bmiResult.textContent = `RESULT: Your BMI is ${bmi} (${status})`;
 
         // Store current values
         currentBMI = bmi;
@@ -496,7 +367,7 @@ function attachBMIFormHandler() {
     aiBtn.addEventListener('click', () => {
         if(!currentBMI && !currentStatus) return;
 
-        aiBox.textContent = 'Loading AI Suggestions...';
+        aiBox.innerHTML = '<p class="loading-text">Fueling up focus & facts<span class="dots"></span></p>';
 
         //aiResponseContainer.classList.add('visible');
 
@@ -514,8 +385,21 @@ function attachBMIFormHandler() {
         })
         .then(response => response.json())
         .then(data => {
-            // Assume data contains a 'suggestion' propertyy with AI tips
-            aiBox.innerHTML = formatAIOutput(data.suggestion) || 'No suggestion available.';  
+            const formatText = data.suggestion;
+            aiBox.innerHTML = formatText || 'No suggestion available.'; 
+            
+            let formatted = formatText
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")         // Bold
+                .replace(/==(.+?)==/g, "<span class='highlight'>$1</span>") // Highlight
+                .replace(/\* (.*?)\n/g, "<li>$1</li>")                     // Bullet points
+                .replace(/---+/g, "<hr>")                                  // Horizontal rule
+                .replace(/\n{2,}/g, "</ul><ul>")                           // New block of bullets
+                .replace(/\n/g, "<br>")                                    // Line breaks
+                .replace(/#/g, "🏃");
+
+            formatted = `<ul>${formatted}</ul>`;
+            aiBox.innerHTML = formatted;
+
         })
         .catch(err => {
             aiBox.textContent = 'Failed to load AI suegstions, Please try again later.';
@@ -524,15 +408,23 @@ function attachBMIFormHandler() {
     });
 };
 
+
 // Nutrition Form Reminder
 function attachNutritionFormHandler() {
     const form = document.getElementById("nutrition-form");
+    const submitButton = document.getElementById("submit-nutrition");
     const resultDiv = document.getElementById("nutrition-result");
-    const mealPlanDiv = document.getElementById("meal-plan-response");
+    const mealPlanDiv = document.getElementById("response-box");
     const generateButton = document.getElementById("generate-meal");
 
+    
+
     // Load last saved plan (if any)
-    const savedPlan = JSON.parse(localStorage.getItem("nutrition-plan"));
+    const savedPlan = JSON.parse(localStorage.getItem("nutrition-plans-section"));
+    
+    submitButton.addEventListener("click", function() {
+        form.requestSubmit();
+    });
 
     if (savedPlan) {
         displayPlan(savedPlan, resultDiv);
@@ -550,7 +442,7 @@ function attachNutritionFormHandler() {
             mealsPerDay: document.getElementById("meals-per-day").value
         };
 
-        localStorage.setItem("nutrition-plan", JSON.stringify(plan));
+        localStorage.setItem("nutrition-plans-section", JSON.stringify(plan));
         displayPlan(plan, resultDiv);
     });
 
@@ -570,13 +462,13 @@ function attachNutritionFormHandler() {
     // Handle Generate Meal Plan API request
     if (generateButton) {
         generateButton.addEventListener("click", () => {
-            const plan = JSON.parse(localStorage.getItem("nutrition-plan"));
+            const plan = JSON.parse(localStorage.getItem("nutrition-plans-section"));
             if (!plan) {
                 alert("Please submit a nutrition plan first.");
                 return;
             }
 
-            mealPlanDiv.innerHTML = "<p>Generating meal plan...</p>";
+            mealPlanDiv.innerHTML = '<p class="loading-text">Fueling up focus & facts<span class="dots"></span></p>';
 
             fetch("http://127.0.0.1:5000/generate_meal_plan", {
                 method: "POST",
@@ -599,10 +491,12 @@ function attachNutritionFormHandler() {
 
                 let formatted = mealText
                     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Bold **text**
+                    .replace(/==(.+?)==/g, "<span class='highlight'>$1</span>")
                     .replace(/\* (.*?)\n/g, "<li>$1</li>")            // Convert * lines to list items
                     .replace(/---+/g, "<hr>")                         // Replace markdown dividers with <hr>
                     .replace(/\n{2,}/g, "</ul><ul>")                  // Separate blocks
-                    .replace(/\n/g, "<br>");                          // Regular line breaks
+                    .replace(/\n/g, "<br>")                           // Regular line breaks
+                    .replace(/#/g, "");
 
                 // Wrap on <ul> if needed
                 formatted = `<ul>${formatted}</ul>`;
@@ -619,17 +513,74 @@ function attachNutritionFormHandler() {
 
     function displayPlan(plan, container) {
         container.innerHTML = `
-            <h3>Your Nutrition Plan</h3>
+            <h3>🍞Nutrition Result</h3>
             <ul>
-                <li><strong>Age:</strong> ${plan.age} years old</li>
-                <li><strong>Height:</strong> ${plan.height} cm</li>
-                <li><strong>Weight:</strong> ${plan.weight} kg</li>
-                <li><strong>Ideal Weight:</strong> ${plan.idealWeight} kg</li>
-                <li><strong>Goal:</strong> ${plan.diet}</li>
-                <li><strong>Meals/Day:</strong> ${plan.mealsPerDay}</li>
+                <li><strong>⏳Age:</strong> ${plan.age} years old</li>
+                <li><strong>📏Height:</strong> ${plan.height} cm</li>
+                <li><strong>⚖️Weight:</strong> ${plan.weight} kg</li>
+                <li><strong>🏋️Ideal Weight:</strong> ${plan.idealWeight} kg</li>
+                <li><strong>Diet:</strong> ${plan.diet}</li>
+                <li><strong>🍽️Meals/Day:</strong> ${plan.mealsPerDay}</li>
             </ul>`;
     }
 }
+
+// Ask AI
+function AskAI(event) {
+    event.preventDefault();
+
+    const question = document.getElementById("user-question").value;
+    const responsiveDiv = document.getElementById("ai-response");
+
+    
+    if(!responsiveDiv) {
+        console.error("Element with ID 'ai-response' not found. ");
+        return;
+    }
+    
+    responsiveDiv.style.display = "block"; // Hide Previous response
+    responsiveDiv.innerHTML = '<p class="loading-text">Initializing intelligence<span class="dots"></span></p>';
+
+        // Get all selected checkbox values
+    const selectedNeeds = Array.from(document.querySelectorAll('input[name="need"]:checked')).map(cb => cb.value);
+        // Get selected country
+    const selectCountry = document.getElementById("country-select").value;
+
+    fetch("http://127.0.0.1:5000/ask_ai", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            question: question,
+            needs: selectedNeeds,
+            country: selectCountry
+         })
+    })
+    .then(response => {
+        if(!response.ok) {
+            throw new Error("Server error");
+            
+        }
+        return response.json();
+    })
+    .then(data => {
+        const markdown = data.response || "No answer received.";
+        const rawHTML = marked.parse(markdown); // Convert markdown to html
+        const safeHTML = DOMPurify.sanitize(rawHTML);
+
+        // HTML content
+        responsiveDiv.innerHTML = safeHTML;
+        responsiveDiv.style.display = "block";
+    })
+    .catch(error => {
+        console.error("Error", error);
+        spinner.style.display = "none";
+        console.error("Error", error);
+        responsiveDiv.innerText = "Failed to contact AI server";
+    });
+};
+
 
 // Medication Reminder;Local Storage for Java Script; no log in required
     // Once we have the log in; we can change this to python
